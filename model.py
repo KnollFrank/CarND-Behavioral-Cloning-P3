@@ -33,16 +33,19 @@ def get_data(df, column):
     return np.array(df[column].values.tolist())
 
 
+print('get_images_and_measurements ...')
 images_measurements = get_images_and_measurements(8036)
+print('... get_images_and_measurements')
 X_train = get_data(images_measurements, 'image')
 y_train = get_data(images_measurements, 'measurement')
 
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Lambda, MaxPooling2D
+from keras.layers import Flatten, Dense, Lambda, MaxPooling2D, Cropping2D
 from keras.layers.convolutional import Convolution2D
 
 model = Sequential()
 model.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160, 320, 3)))
+model.add(Cropping2D(cropping=((70, 25), (0, 0))))
 model.add(Convolution2D(6, 5, 5, activation='relu'))
 model.add(MaxPooling2D())
 model.add(Convolution2D(6, 5, 5, activation='relu'))
