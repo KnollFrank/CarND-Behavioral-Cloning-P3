@@ -6,15 +6,18 @@ from scipy import ndimage
 
 def get_driving_log():
     base_path = '../CarND-Behavioral-Cloning-P3-data_from_udacity/data/'
+
     def correct_path(path):
         filename = path.split('/')[-1]
         return base_path + 'IMG/' + filename
 
+    def correct_path_in_column(df, column):
+        df[column] = df[column].map(correct_path)
+
     df = pd.read_csv(base_path + 'driving_log.csv')
-    # TODO: DRY
-    df['center'] = df['center'].map(correct_path)
-    df['left'] = df['left'].map(correct_path)
-    df['right'] = df['right'].map(correct_path)
+    correct_path_in_column(df, 'center')
+    correct_path_in_column(df, 'left')
+    correct_path_in_column(df, 'right')
     return df
 
 
