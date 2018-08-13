@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from scipy import ndimage
 
+
 def get_driving_log():
     base_path = '../CarND-Behavioral-Cloning-P3-data_from_udacity/data/'
 
@@ -33,13 +34,12 @@ X_train = np.array(images_measurements['image'].values)
 y_train = np.array(images_measurements['measurement'].values)
 
 from keras.models import Sequential
-from keras.layers import  Flatten, Dense
+from keras.layers import Flatten, Dense
 
 model = Sequential()
 model.add(Flatten(input_shape=(160, 320, 3)))
 model.add(Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
-model.fit(X_train, y_train, validation_split = 0.2, shuffle = True, nb_epoch = 6)
+model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=6)
 model.save('model.hd5')
-
