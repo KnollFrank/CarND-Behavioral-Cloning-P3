@@ -2,14 +2,15 @@
 
 import numpy as np
 import pandas as pd
-
+from scipy import ndimage
 
 def get_driving_log():
+    base_path = '../CarND-Behavioral-Cloning-P3-data_from_udacity/data/'
     def correct_path(path):
         filename = path.split('/')[-1]
-        return '../CarND-Behavioral-Cloning-P3-data_from_udacity/data/IMG/' + filename
+        return base_path + 'IMG/' + filename
 
-    df = pd.read_csv('../CarND-Behavioral-Cloning-P3-data_from_udacity/data/driving_log.csv')
+    df = pd.read_csv(base_path + 'driving_log.csv')
     # TODO: DRY
     df['center'] = df['center'].map(correct_path)
     df['left'] = df['left'].map(correct_path)
@@ -19,7 +20,7 @@ def get_driving_log():
 
 def get_images_and_measurements(size):
     df = get_driving_log()[:size]
-    return df['center'].values, df['steering'].values
+    return df['center'].map(ndimage.imread).values, df['steering'].values
 
 
 images, measurements = get_images_and_measurements(50)
