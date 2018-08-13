@@ -25,13 +25,17 @@ def get_driving_log():
 def get_images_and_measurements(size):
     df = get_driving_log()[:size]
     return pd.DataFrame(
-        {'image': df['center'].map(ndimage.imread).values.tolist(),
+        {'image': df['center'].map(ndimage.imread).values,
          'measurement': df['steering'].values})
 
 
+def get_data(df, column):
+    return np.array(df[column].values.tolist())
+
+
 images_measurements = get_images_and_measurements(50)
-X_train = np.array(images_measurements['image'].values.tolist())
-y_train = images_measurements['measurement'].values
+X_train = get_data(images_measurements, 'image')
+y_train = get_data(images_measurements, 'measurement')
 
 from keras.models import Sequential
 from keras.layers import Flatten, Dense
