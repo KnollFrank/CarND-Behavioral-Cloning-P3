@@ -33,7 +33,7 @@ def get_data(df, column):
     return np.array(df[column].values.tolist())
 
 
-images_measurements = get_images_and_measurements(50)
+images_measurements = get_images_and_measurements(8036)
 X_train = get_data(images_measurements, 'image')
 y_train = get_data(images_measurements, 'measurement')
 
