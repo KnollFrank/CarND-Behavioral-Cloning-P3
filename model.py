@@ -2,7 +2,6 @@
 
 import numpy as np
 import pandas as pd
-from scipy import ndimage
 
 
 def get_driving_log():
@@ -19,16 +18,8 @@ def get_driving_log():
 
 
 def get_images_and_measurements(size):
-    images = []
-    measurements = []
     df = get_driving_log()[:size]
-    for index, row in df.iterrows():
-        image = ndimage.imread(row['center'])
-        images.append(image)
-        measurement = row['steering']
-        measurements.append(measurement)
-
-    return images, measurements
+    return df['center'].values, df['steering'].values
 
 
 images, measurements = get_images_and_measurements(50)
