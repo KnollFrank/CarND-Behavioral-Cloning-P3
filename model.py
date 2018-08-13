@@ -4,6 +4,8 @@ import numpy as np
 import pandas as pd
 from scipy import ndimage
 
+from preprocess import preprocess, create_Cropping2D, get_input_shape
+
 
 def get_driving_log():
     base_path = '../CarND-Behavioral-Cloning-P3-data_from_udacity/data/'
@@ -23,9 +25,12 @@ def get_driving_log():
 
 
 def get_images_and_measurements(size):
+    def read_and_preprocess(image_file):
+        return preprocess(ndimage.imread(image_file))
+
     df = get_driving_log()[:size]
     return pd.DataFrame(
-        {'image': df['center'].map(ndimage.imread).values,
+        {'image': df['center'].map(read_and_preprocess).values,
          'measurement': df['steering'].values})
 
 
@@ -40,12 +45,12 @@ X_train = get_data(images_measurements, 'image')
 y_train = get_data(images_measurements, 'measurement')
 
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Lambda, MaxPooling2D, Cropping2D
+from keras.layers import Flatten, Dense, Lambda, MaxPooling2D
 from keras.layers.convolutional import Convolution2D
 
 model = Sequential()
-model.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160, 320, 3)))
-model.add(Cropping2D(cropping=((70, 25), (0, 0))))
+model.add(Lambda(lambda image: image / 255.0 - 0.5, input_shape=get_input_shape()))
+model.add(create_Cropping2D())
 model.add(Convolution2D(6, 5, 5, activation='relu'))
 model.add(MaxPooling2D())
 model.add(Convolution2D(6, 5, 5, activation='relu'))
