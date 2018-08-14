@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 import pandas as pd
 from keras.layers import Cropping2D
 from scipy import ndimage
@@ -45,10 +44,6 @@ def get_images_and_measurements(size):
         return preprocess(ndimage.imread(image_file))
 
     df = get_driving_log()[:size]
-    return pd.DataFrame(
-        {'image': df['center'].map(read_and_preprocess).values,
-         'measurement': df['steering'].values})
-
-
-def get_data(df, column):
-    return np.array(df[column].values.tolist())
+    images = df['center'].map(read_and_preprocess).values.tolist()
+    measurements = df['steering'].values.tolist()
+    return images, measurements
