@@ -18,7 +18,7 @@ class FlipTestCase(TestCase):
         # WHEN
         flipped_image, flipped_measurement = flip(image, measurement)
 
-        # THENfliped_measurement
+        # THEN
         np.testing.assert_array_equal(flipped_image,
                                       np.array([[0., 0., 1.],
                                                 [0., 2., 0.],
