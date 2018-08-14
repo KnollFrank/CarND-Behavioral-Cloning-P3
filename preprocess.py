@@ -64,3 +64,7 @@ def flip_images(images):
 
 def flip_measurements(measurements):
     return map(flip_measurement, measurements)
+
+
+def get_augmented_images_and_measurements(images, measurements):
+    return [*images, *flip_images(images)], [*measurements, *flip_measurements(measurements)]
