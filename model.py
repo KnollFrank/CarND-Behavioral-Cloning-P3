@@ -6,7 +6,7 @@ from preprocess import create_Cropping2D, get_input_shape, get_images_and_measur
 
 def get_X_train_y_train():
     print('get_images_and_measurements ...')
-    images, measurements = get_images_and_measurements(5)
+    images, measurements = get_images_and_measurements()
     print('... get_images_and_measurements')
     X_train = np.array(images)
     y_train = np.array(measurements)
