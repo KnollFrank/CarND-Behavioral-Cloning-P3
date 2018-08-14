@@ -50,5 +50,17 @@ def get_images_and_measurements():
     return images, measurements
 
 
-def flip(image, measurement):
-    return np.fliplr(image), -measurement
+def flip_image(image):
+    return np.fliplr(image)
+
+
+def flip_measurement(measurement):
+    return -measurement
+
+
+def flip_images(images):
+    return map(flip_image, images)
+
+
+def flip_measurements(measurements):
+    return map(flip_measurement, measurements)
