@@ -20,6 +20,7 @@ from keras.layers import Flatten, Dense, Lambda, MaxPooling2D
 from keras.layers.convolutional import Convolution2D
 
 
+# val_loss: 0.02299
 def create_model_LeNet():
     model = Sequential()
     model.add(Lambda(lambda image: image / 255.0 - 0.5, input_shape=get_input_shape()))
@@ -35,6 +36,7 @@ def create_model_LeNet():
     return model
 
 
+# val_loss: 0.02381
 def create_model_Nvidia():
     model = Sequential()
     model.add(Lambda(lambda image: image / 255.0 - 0.5, input_shape=get_input_shape()))
@@ -53,7 +55,7 @@ def create_model_Nvidia():
 
 
 X_train, y_train = get_X_train_y_train()
-model = create_model_Nvidia()
+model = create_model_LeNet()
 model.compile(loss='mse', optimizer='adam')
 model.fit(X_train,
           y_train,
@@ -62,6 +64,3 @@ model.fit(X_train,
           callbacks=[ModelCheckpoint(filepath='model.hd5', verbose=1, save_best_only=True)],
           epochs=5,
           verbose=1)
-
-# TODO: Data Augmentation (https://classroom.udacity.com/nanodegrees/nd013/parts/edf28735-efc1-4b99-8fbb-ba9c432239c8/modules/6b6c37bc-13a5-47c7-88ed-eb1fce9789a0/lessons/3fc8dd70-23b3-4f49-86eb-a8707f71f8dd/concepts/580c6a1d-9d20-4d2e-a77d-755e0ca0d4cd)
-# TODO: videos following Data Augmentation
