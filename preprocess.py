@@ -66,5 +66,12 @@ def flip_measurements(measurements):
     return map(flip_measurement, measurements)
 
 
+def get_steering_left(steering_center):
+    return steering_center + 0.2
+
+
+def get_steering_right(steering_center):
+    return steering_center - 0.2
+
 def get_augmented_images_and_measurements(images, measurements):
     return [*images, *flip_images(images)], [*measurements, *flip_measurements(measurements)]
