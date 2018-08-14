@@ -44,16 +44,15 @@ def get_images_and_measurements():
     def read_and_preprocess(image_file):
         return preprocess(ndimage.imread(image_file))
 
+    def get_images_and_steerings(df, column, adapt_steering):
+        images = df[column].map(read_and_preprocess).values.tolist()
+        steerings = df['steering'].map(adapt_steering).values.tolist()
+        return images, steerings
+
     df = get_driving_log()
-    images_center = df['center'].map(read_and_preprocess).values.tolist()
-    steerings_center = df['steering'].values.tolist()
-
-    images_left = df['left'].map(read_and_preprocess).values.tolist()
-    steerings_left = df['steering'].map(get_steering_left).values.tolist()
-
-    images_right = df['right'].map(read_and_preprocess).values.tolist()
-    steerings_right = df['steering'].map(get_steering_right).values.tolist()
-
+    images_center, steerings_center = get_images_and_steerings(df, 'center', lambda x: x)
+    images_left, steerings_left = get_images_and_steerings(df, 'left', get_steering_left)
+    images_right, steerings_right = get_images_and_steerings(df, 'right', get_steering_right)
     return [*images_center, *images_left, *images_right], [*steerings_center, *steerings_left, *steerings_right]
 
 
