@@ -7,9 +7,7 @@ from preprocess import create_Cropping2D, get_input_shape, get_images_and_measur
 
 
 def get_X_train_y_train():
-    print('get_images_and_measurements ...')
     images, measurements = get_augmented_images_and_measurements(*get_images_and_measurements())
-    print('... get_images_and_measurements')
     X_train = np.array(images)
     y_train = np.array(measurements)
     return X_train, y_train
@@ -61,6 +59,6 @@ model.fit(X_train,
           y_train,
           validation_split=0.2,
           shuffle=True,
-          callbacks=[ModelCheckpoint(filepath='model.hd5', verbose=1, save_best_only=True)],
+          callbacks=[ModelCheckpoint(filepath='model.h5', verbose=1, save_best_only=True)],
           epochs=5,
           verbose=1)
