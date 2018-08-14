@@ -18,7 +18,7 @@ from keras.layers import Flatten, Dense, Lambda, MaxPooling2D
 from keras.layers.convolutional import Convolution2D
 
 
-# val_loss: 0.02299
+# val_loss: 0.02173
 def create_model_LeNet():
     model = Sequential()
     model.add(Lambda(lambda image: image / 255.0 - 0.5, input_shape=get_input_shape()))
