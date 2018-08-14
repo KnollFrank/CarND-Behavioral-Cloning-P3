@@ -45,9 +45,16 @@ def get_images_and_measurements():
         return preprocess(ndimage.imread(image_file))
 
     df = get_driving_log()
-    images = df['center'].map(read_and_preprocess).values.tolist()
-    measurements = df['steering'].values.tolist()
-    return images, measurements
+    images_center = df['center'].map(read_and_preprocess).values.tolist()
+    steerings_center = df['steering'].values.tolist()
+
+    images_left = df['left'].map(read_and_preprocess).values.tolist()
+    steerings_left = df['steering'].map(get_steering_left).values.tolist()
+
+    images_right = df['right'].map(read_and_preprocess).values.tolist()
+    steerings_right = df['steering'].map(get_steering_right).values.tolist()
+
+    return [*images_center, *images_left, *images_right], [*steerings_center, *steerings_left, *steerings_right]
 
 
 def flip_image(image):
