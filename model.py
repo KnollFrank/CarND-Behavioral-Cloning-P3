@@ -1,12 +1,13 @@
 # https://classroom.udacity.com/nanodegrees/nd013/parts/edf28735-efc1-4b99-8fbb-ba9c432239c8/modules/6b6c37bc-13a5-47c7-88ed-eb1fce9789a0/lessons/3fc8dd70-23b3-4f49-86eb-a8707f71f8dd/concepts/b6356fc5-5191-40ae-a2d9-3c8d2c2b37bb
 import numpy as np
 
-from preprocess import create_Cropping2D, get_input_shape, get_images_and_measurements
+from preprocess import create_Cropping2D, get_input_shape, get_images_and_measurements, \
+    get_augmented_images_and_measurements
 
 
 def get_X_train_y_train():
     print('get_images_and_measurements ...')
-    images, measurements = get_images_and_measurements()
+    images, measurements = get_augmented_images_and_measurements(*get_images_and_measurements())
     print('... get_images_and_measurements')
     X_train = np.array(images)
     y_train = np.array(measurements)
