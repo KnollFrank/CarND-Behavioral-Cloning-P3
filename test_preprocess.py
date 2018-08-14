@@ -6,7 +6,7 @@ from preprocess import flip_image, flip_measurement, flip_images, flip_measureme
     get_augmented_images_and_measurements, get_steering_left, get_steering_right
 
 
-class FlipTestCase(TestCase):
+class PreprocessTestCase(TestCase):
 
     def test_flip_image(self):
         # GIVEN
