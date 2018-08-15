@@ -101,21 +101,21 @@ To capture good driving behavior, I used the [sample driving data](https://d17h2
 
 ##### Resizing Images to a Quarter
 
-The training process on my local computer having no GPU was quite slow. A tip from a former udacity student I have found on the net was to resize the images. So I resized the images by adding a keras `AveragePooling2D` layer, which resulted in no performance gain. But resizing the images to a quarter using `cv2.resize()` prior to feeding them to the neural network had the desired positive effect on training speed. Here is an example of a resized image:
+The training process on my local computer having no GPU was quite slow. A tip from a former udacity student I have found on the net was to resize the images. So I resized the images by adding a keras `AveragePooling2D` layer, which resulted in no performance gain. But resizing the images to a quarter using `cv2.resize()` prior to feeding them to the neural network had the desired positive effect on training speed without worsening validation loss. Here is an example of a resized image:
 
 ![quartered image](examples/center_2016_12_01_13_33_44_608_quartered.jpg)
 
 ##### Recovery Driving
 
-- left and right camera images, adapt steering: This way, you can teach your model how to steer if the car drifts off to the left or the right.
+I then simulated the car recovering from the left side and right sides of the road back to center so that the car would learn to steer if it drifts off to the left or the right. Following the lecture "Using Multiple Cameras" I exchanged the center camera image with the left (respectively right) camera image and adapted the steering angle in order to steer more to the right (respectively left).
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
+These images show what a recovery looks like starting from the left using a steering angle of 0.2°:
 
 ![left camera](examples/left_2016_12_01_13_33_44_608.jpg)
 
-![right camera](examples/right_2016_12_01_13_33_44_608.jpg)
+or starting from the right using a steering angle of -0.2°:
 
-steering = 0°.
+![right camera](examples/right_2016_12_01_13_33_44_608.jpg)
 
 ##### Flipping Images And Steering Measurements
 
