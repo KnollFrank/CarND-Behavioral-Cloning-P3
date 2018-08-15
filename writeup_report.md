@@ -92,21 +92,22 @@ The final model architecture (model.py, function `create_model_LeNet()`) is a co
 ![Model Visualization (LeNet)](examples/LeNet.jpg)
 
 #### 3. Creation of the Training Set & Training Process
-TODO:
-- Flipping Images And Steering Measurements. An effective technique for helping with the left turn bias involves flipping images and taking the opposite sign of the steering measurement.
-- left and right camera images, adapt steering: This way, you can teach your model how to steer if the car drifts off to the left or the right.
 
 ##### Training Process
 
-To capture good driving behavior, I used the [sample driving data](https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip) provided in the lecture to train the network. Here is an example image of center lane driving:
+To capture good driving behavior, I used the [sample driving data](https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip) provided in the lecture. Here is an example image of center lane driving:
 
 ![center lane driving](examples/center_2016_12_01_13_33_44_608.jpg)
 
 ##### Resizing Images to a Quarter
 
+The training process on my local computer having no GPU was quite slow. A tip from a former udacity student I have found on the net was to resize the images. So I resized the images by adding a keras `AveragePooling2D` layer, which resulted in no performance gain. But resizing the images to a quarter using `cv2.resize()` prior to feeding them to the neural network had the desired positive effect on training speed. Here is an example of a resized image:
+
 ![quartered image](examples/center_2016_12_01_13_33_44_608_quartered.jpg)
 
 ##### Recovery Driving
+
+- left and right camera images, adapt steering: This way, you can teach your model how to steer if the car drifts off to the left or the right.
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
 
@@ -117,6 +118,8 @@ I then recorded the vehicle recovering from the left side and right sides of the
 steering = 0°.
 
 ##### Flipping Images And Steering Measurements
+
+- Flipping Images And Steering Measurements. An effective technique for helping with the left turn bias involves flipping images and taking the opposite sign of the steering measurement.
 
 To augment the data set, I also flipped images and angles thinking that this would ... For example, here is an image captured by the center camera showing a right turn:
 
