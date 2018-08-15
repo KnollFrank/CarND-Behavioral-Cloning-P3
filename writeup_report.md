@@ -97,13 +97,13 @@ The final model architecture (model.py, function `create_model_LeNet()`) is a co
 
 To capture good driving behavior, I used the [sample driving data](https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip) provided in the lecture. Here is an example image of center lane driving:
 
-![center lane driving](examples/center_2016_12_01_13_33_44_608.jpg)
+![center lane driving](examples/center_2016_12_01_13_31_15_308.jpg)
 
 ##### Resizing Images to a Quarter
 
 The training process on my local computer having no GPU was quite slow. A tip from a former udacity student I have found on the net was to resize the images. So I resized the images by adding a keras `AveragePooling2D` layer, which resulted in no performance gain. But resizing the images to a quarter using `cv2.resize()` prior to feeding them to the neural network had the desired positive effect on training speed without worsening validation loss. Here is an example of a resized image:
 
-![quartered image](examples/center_2016_12_01_13_33_44_608_quartered.jpg)
+![quartered image](examples/center_2016_12_01_13_31_15_308_quartered.jpg)
 
 ##### Recovery Driving
 
@@ -111,23 +111,25 @@ I then simulated the car recovering from the left side and right sides of the ro
 
 These images show what a recovery looks like starting from the left using a steering angle of 0.2°:
 
-![left camera](examples/left_2016_12_01_13_33_44_608.jpg)
+![left camera](examples/left_2016_12_01_13_31_15_308.jpg)
 
 or starting from the right using a steering angle of -0.2°:
 
-![right camera](examples/right_2016_12_01_13_33_44_608.jpg)
+![right camera](examples/right_2016_12_01_13_31_15_308.jpg)
 
-##### Flipping Images And Steering Measurements
+##### Flipping Images And Steering Angles
 
 - Flipping Images And Steering Measurements. An effective technique for helping with the left turn bias involves flipping images and taking the opposite sign of the steering measurement.
 
-To augment the data set, I also flipped images and angles thinking that this would ... For example, here is an image captured by the center camera showing a right turn:
+As the trained car often tries to steer to the left (named 'left turn bias' in the lecture "Data Augmentation") the images and steering angles were flipped in order to present the neural network with more right turns.
 
-![Image captured by the center camera](examples/center_2016_12_01_13_33_44_608.jpg)
+For example, here is an image captured by the center camera showing a left turn:
 
-And then the image has been flipped vertically now showing a left turn:
+![Image captured by the center camera](examples/center_2016_12_01_13_31_15_308.jpg)
 
-![Flipped image from the center camera](examples/center_2016_12_01_13_33_44_608_flipped.jpg)
+And then the image has been flipped vertically now showing a right turn:
+
+![Flipped image from the center camera](examples/center_2016_12_01_13_31_15_308_flipped.jpg)
 
 ##### Cropping Images
 
@@ -135,7 +137,7 @@ And then the image has been flipped vertically now showing a left turn:
 
 Your model might train faster if you crop each image to focus on only the portion of the image that is useful for predicting a steering angle."
 
-![cropped image](examples/center_2016_12_01_13_33_44_608_cropped.jpg)
+![cropped image](examples/center_2016_12_01_13_31_15_308_cropped.jpg)
 
 After the collection process, I had X number of data points. I then preprocessed this data by ...
 
