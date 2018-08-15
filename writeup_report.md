@@ -76,6 +76,7 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 #### 2. Final Model Architecture
 
 TODO:
+- the type of model used, the number of layers, the size of each layer
 - layers erklären, vor allem warum 40, 80, 30? Tip: Preprocess, resize
 
 The final model architecture (model.py, function `create_model_LeNet()`) is a convolutional neural network derived from [LeNet-5](http://yann.lecun.com/exdb/lenet/). Here is a visualization of the architecture:

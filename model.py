@@ -18,6 +18,13 @@ from keras.layers import Flatten, Dense, Lambda, MaxPooling2D
 from keras.layers.convolutional import Convolution2D
 
 
+def create_model_simple():
+    model = Sequential()
+    model.add(Flatten(input_shape=get_input_shape()))
+    model.add(Dense(1))
+    return model
+
+
 # val_loss: 0.02173
 def create_model_LeNet():
     model = Sequential()
@@ -52,17 +59,17 @@ def create_model_Nvidia():
     return model
 
 
-def train():
-    X_train, y_train = get_X_train_y_train()
-    model = create_model_LeNet()
+def train(model, X, y, save_model_2_file):
     model.compile(loss='mse', optimizer='adam')
-    model.fit(X_train,
-              y_train,
-              validation_split=0.2,
-              shuffle=True,
-              callbacks=[ModelCheckpoint(filepath='model.h5', verbose=1, save_best_only=True)],
-              epochs=5,
-              verbose=1)
+    history_object = model.fit(X,
+                               y,
+                               validation_split=0.2,
+                               shuffle=True,
+                               callbacks=[ModelCheckpoint(filepath=save_model_2_file, verbose=1, save_best_only=True)],
+                               epochs=5,
+                               verbose=1)
+    return history_object
 
 if __name__ == '__main__':
-    train()
+    X_train, y_train = get_X_train_y_train()
+    train(create_model_LeNet(), X_train, y_train, save_model_2_file='model.h5')
