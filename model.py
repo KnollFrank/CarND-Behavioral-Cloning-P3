@@ -52,13 +52,17 @@ def create_model_Nvidia():
     return model
 
 
-X_train, y_train = get_X_train_y_train()
-model = create_model_LeNet()
-model.compile(loss='mse', optimizer='adam')
-model.fit(X_train,
-          y_train,
-          validation_split=0.2,
-          shuffle=True,
-          callbacks=[ModelCheckpoint(filepath='model.h5', verbose=1, save_best_only=True)],
-          epochs=5,
-          verbose=1)
+def train():
+    X_train, y_train = get_X_train_y_train()
+    model = create_model_LeNet()
+    model.compile(loss='mse', optimizer='adam')
+    model.fit(X_train,
+              y_train,
+              validation_split=0.2,
+              shuffle=True,
+              callbacks=[ModelCheckpoint(filepath='model.h5', verbose=1, save_best_only=True)],
+              epochs=5,
+              verbose=1)
+
+if __name__ == '__main__':
+    train()
