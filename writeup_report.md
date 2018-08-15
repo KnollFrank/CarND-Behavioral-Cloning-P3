@@ -84,30 +84,55 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 #### 2. Final Model Architecture
 
+TODO:
+- layers erklären, vor allem warum 40, 80, 30? Tip: Preprocess, resize
+
 The final model architecture (model.py, function `create_model_LeNet()`) is a convolutional neural network derived from [LeNet-5](http://yann.lecun.com/exdb/lenet/). Here is a visualization of the architecture:
 
 ![Model Visualization (LeNet)](examples/LeNet.jpg)
 
 #### 3. Creation of the Training Set & Training Process
+TODO:
+- Flipping Images And Steering Measurements. An effective technique for helping with the left turn bias involves flipping images and taking the opposite sign of the steering measurement.
+- left and right camera images, adapt steering: This way, you can teach your model how to steer if the car drifts off to the left or the right.
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+##### Training Process
 
-![alt text][image2]
+To capture good driving behavior, I used the [sample driving data](https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip) provided in the lecture to train the network. Here is an example image of center lane driving:
+
+![center lane driving](examples/center_2016_12_01_13_33_44_608.jpg)
+
+##### Resizing Images to a Quarter
+
+![quartered image](examples/center_2016_12_01_13_33_44_608_quartered.jpg)
+
+##### Recovery Driving
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
 
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
+![left camera](examples/left_2016_12_01_13_33_44_608.jpg)
 
-Then I repeated this process on track two in order to get more data points.
+![right camera](examples/right_2016_12_01_13_33_44_608.jpg)
 
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
+steering = 0°.
 
-![alt text][image6]
-![alt text][image7]
+##### Flipping Images And Steering Measurements
 
-Etc ....
+To augment the data set, I also flipped images and angles thinking that this would ... For example, here is an image captured by the center camera showing a right turn:
+
+![Image captured by the center camera](examples/center_2016_12_01_13_33_44_608.jpg)
+
+And then the image has been flipped vertically now showing a left turn:
+
+![Flipped image from the center camera](examples/center_2016_12_01_13_33_44_608_flipped.jpg)
+
+##### Cropping Images
+
+"Not all of these pixels contain useful information, however. In the image above, the top portion of the image captures trees and hills and sky, and the bottom portion of the image captures the hood of the car.
+
+Your model might train faster if you crop each image to focus on only the portion of the image that is useful for predicting a steering angle."
+
+![cropped image](examples/center_2016_12_01_13_33_44_608_cropped.jpg)
 
 After the collection process, I had X number of data points. I then preprocessed this data by ...
 
