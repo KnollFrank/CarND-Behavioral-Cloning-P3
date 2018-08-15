@@ -57,9 +57,23 @@ For details about how I created the training data, see the next section.
 
 The overall strategy for deriving a model architecture was to start with a simple neural network and gradually adding more layers in order to reduce validation loss.
 
-- simple neural network
-- LeNet
-- Nvidia (see paper)
+simple neural network:
+
+![simple model](examples/loss_model_simple.png)
+
+minimal validation loss: 315.80576
+
+LeNet:
+
+![LeNet model](examples/loss_model_lenet.png)
+
+minimal validation loss: 0.02058
+
+Nvidia (see paper):
+
+![Nvidia model](examples/loss_model_nvidia.png)
+
+minimal validation loss: 0.02452
 
 My first step was to use a convolutional neural network model similar to the ... I thought this model might be appropriate because ...
 
