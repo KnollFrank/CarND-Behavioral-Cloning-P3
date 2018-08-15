@@ -119,9 +119,7 @@ or starting from the right using a steering angle of -0.2°:
 
 ##### Flipping Images And Steering Angles
 
-- Flipping Images And Steering Measurements. An effective technique for helping with the left turn bias involves flipping images and taking the opposite sign of the steering measurement.
-
-As the trained car often tries to steer to the left (named 'left turn bias' in the lecture "Data Augmentation") the images and steering angles were flipped in order to present the neural network with more right turns.
+As the trained car often tries to steer to the left (named 'left turn bias' in the lecture "Data Augmentation") the images and steering angles were flipped in order to present the neural network with more right turns and suitable steering angles.
 
 For example, here is an image captured by the center camera showing a left turn:
 
