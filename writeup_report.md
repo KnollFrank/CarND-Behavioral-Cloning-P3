@@ -125,15 +125,13 @@ For example, here is an image captured by the center camera showing a left turn:
 
 ![Image captured by the center camera](examples/center_2016_12_01_13_31_15_308.jpg)
 
-And then the image has been flipped vertically now showing a right turn:
+And then the image has been flipped vertically in order to show a right turn:
 
 ![Flipped image from the center camera](examples/center_2016_12_01_13_31_15_308_flipped.jpg)
 
 ##### Cropping Images
 
-"Not all of these pixels contain useful information, however. In the image above, the top portion of the image captures trees and hills and sky, and the bottom portion of the image captures the hood of the car.
-
-Your model might train faster if you crop each image to focus on only the portion of the image that is useful for predicting a steering angle."
+As explained in the lecture "Cropping Images in Keras ", not all of the pixels in a camera image contain useful information for predicting steering angles. So the top portion of the image containing trees and hills and sky, and the bottom portion of the image containing the hood of the car are removed using a `Cropping2D` layer within the neural network. Here is an example of a cropped image:
 
 ![cropped image](examples/center_2016_12_01_13_31_15_308_cropped.jpg)
 
