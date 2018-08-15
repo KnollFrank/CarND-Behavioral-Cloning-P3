@@ -65,7 +65,11 @@ For details about how I created the training data, see the next section.
 
 #### 1. Solution Design Approach
 
-The overall strategy for deriving a model architecture was to ...
+The overall strategy for deriving a model architecture was to start with a simple neural network and gradually adding more layers in order to reduce validation loss.
+
+- simple neural network
+- LeNet
+- Nvidia (see paper)
 
 My first step was to use a convolutional neural network model similar to the ... I thought this model might be appropriate because ...
 
