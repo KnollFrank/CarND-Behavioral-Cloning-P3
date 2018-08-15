@@ -11,15 +11,6 @@ The goals / steps of this project are the following:
 * Test that the model successfully drives around track one without leaving the road
 * Summarize the results with a written report
 
-[//]: # (Image References)
-
-[image2]: ./examples/placeholder.png "Grayscaling"
-[image3]: ./examples/placeholder_small.png "Recovery Image"
-[image4]: ./examples/placeholder_small.png "Recovery Image"
-[image5]: ./examples/placeholder_small.png "Recovery Image"
-[image6]: ./examples/placeholder_small.png "Normal Image"
-[image7]: ./examples/placeholder_small.png "Flipped Image"
-
 ### Files Submitted & Code Quality
 
 My project includes the following files:
@@ -135,9 +126,8 @@ As explained in the lecture "Cropping Images in Keras ", not all of the pixels i
 
 ![cropped image](examples/center_2016_12_01_13_31_15_308_cropped.jpg)
 
-After the collection process, I had X number of data points. I then preprocessed this data by ...
+After the collection, preprocessing and augmentation process, I had 38572 images.
 
+I finally randomly shuffled the data set and put 20% of the data into a validation set.
 
-I finally randomly shuffled the data set and put Y% of the data into a validation set.
-
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The number of epochs was fixed to 5, which is the maximum number of epochs I was willing to wait for results on my local computer. In order to save only the best model params within the 5 epochs I used a `ModelCheckpoint` with `save_best_only=True`. I used an adam optimizer so that manually training the learning rate wasn't necessary.
