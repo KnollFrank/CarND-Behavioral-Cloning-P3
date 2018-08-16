@@ -1,6 +1,8 @@
-# https://classroom.udacity.com/nanodegrees/nd013/parts/edf28735-efc1-4b99-8fbb-ba9c432239c8/modules/6b6c37bc-13a5-47c7-88ed-eb1fce9789a0/lessons/3fc8dd70-23b3-4f49-86eb-a8707f71f8dd/concepts/b6356fc5-5191-40ae-a2d9-3c8d2c2b37bb
 import numpy as np
 from keras.callbacks import ModelCheckpoint
+from keras.layers import Flatten, Dense, Lambda, MaxPooling2D
+from keras.layers.convolutional import Convolution2D
+from keras.models import Sequential
 
 from preprocess import create_Cropping2D, get_input_shape, get_images_and_measurements, \
     get_augmented_images_and_measurements
@@ -11,11 +13,6 @@ def get_X_train_y_train():
     X_train = np.array(images)
     y_train = np.array(measurements)
     return X_train, y_train
-
-
-from keras.models import Sequential
-from keras.layers import Flatten, Dense, Lambda, MaxPooling2D
-from keras.layers.convolutional import Convolution2D
 
 
 def create_model_simple():
@@ -45,8 +42,6 @@ def create_model_Nvidia():
     model.add(Lambda(lambda image: image / 255.0 - 0.5, input_shape=get_input_shape()))
     model.add(create_Cropping2D())
     model.add(Convolution2D(24, 5, 5, subsample=(2, 2), activation='relu'))
-    # model.add(Convolution2D(36, 5, 5, subsample=(2,2), activation='relu'))
-    # model.add(Convolution2D(48, 5, 5, subsample=(2,2), activation='relu'))
     model.add(Convolution2D(64, 3, 3, activation='relu'))
     model.add(Convolution2D(64, 3, 3, activation='relu'))
     model.add(Flatten())
@@ -67,6 +62,7 @@ def train(model, X, y, save_model_2_file):
                                epochs=5,
                                verbose=1)
     return history_object
+
 
 if __name__ == '__main__':
     X_train, y_train = get_X_train_y_train()
