@@ -72,7 +72,7 @@ This implied that the model was underfitting.
 
 #### LeNet
 
-To combat the underfitting, I added convolutional layers among others by switching to [LeNet-5](http://yann.lecun.com/exdb/lenet/) (see model.py, function `create_model_LeNet()`). It had a validation loss of 0.02058 after 5 epochs of training, which is much better than the simple network's validation loss:
+To combat the underfitting, I added convolutional layers among others by switching to [LeNet-5](http://yann.lecun.com/exdb/lenet/) (see model.py, function `create_model_LeNet()`). It's best validation loss was 0.02058 within 5 epochs of training, which is much better than the simple network's validation loss:
 
 ![LeNet model](examples/loss_model_lenet.png)
 
@@ -118,13 +118,13 @@ The training process on my local computer having no GPU was quite slow. A tip fr
 
 #### Recovery Driving
 
-I then simulated the car recovering from the left side and right sides of the road back to center so that the car would learn to steer if it drifts off to the left or the right. Following the lecture "Using Multiple Cameras" I exchanged the center camera image with the left (respectively right) camera image and adapted the steering angle in order to steer more to the right (respectively left).
+I then simulated the car recovering from the left side and right side of the road back to center so that the car would learn to steer if it drifts off to the left or the right. Following the lecture "Using Multiple Cameras" I exchanged the center camera image with the left (respectively right) camera image and adapted the steering angle in order to steer more to the right (respectively left).
 
-These images show what a recovery looks like starting from the left using a steering angle of 0.2°:
+These images show what a recovery looks like starting from the left using a steering angle of 0.2° clockwise:
 
 ![left camera](examples/left_2016_12_01_13_31_15_308.jpg)
 
-or starting from the right using a steering angle of -0.2°:
+or starting from the right using a steering angle of 0.2° counterclockwise:
 
 ![right camera](examples/right_2016_12_01_13_31_15_308.jpg)
 
@@ -136,7 +136,7 @@ For example, here is an image captured by the center camera showing a left turn:
 
 ![Image captured by the center camera](examples/center_2016_12_01_13_31_15_308.jpg)
 
-And then the image has been flipped vertically in order to show a right turn:
+And then the image has been flipped vertically in order to simulate a right turn:
 
 ![Flipped image from the center camera](examples/center_2016_12_01_13_31_15_308_flipped.jpg)
 
@@ -148,6 +148,6 @@ As explained in the lecture "Cropping Images in Keras ", not all of the pixels i
 
 After the collection, preprocessing and augmentation process, I had 38572 images.
 
-I finally randomly shuffled the data set and put 20% of the data into a validation set.
+I finally randomly shuffled the data set and put 20% of the data into a validation set (see model.py: `model.fit(... validation_split=0.2, shuffle=True ...`).
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The number of epochs was fixed to 5, which is the maximum number of epochs I was willing to wait for results on my local computer. In order to save only the best model params within the 5 epochs I used a `ModelCheckpoint` with `save_best_only=True`. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The number of epochs was fixed to 5, which is the maximum number of epochs I was willing to wait for results on my local machine. In order to save only the best model params within the 5 epochs I used a `ModelCheckpoint` with `save_best_only=True`. I used an adam optimizer so that manually training the learning rate wasn't necessary.
