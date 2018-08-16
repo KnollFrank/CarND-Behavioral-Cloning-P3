@@ -32,13 +32,11 @@ The model.py file contains the code for training and saving the convolutional ne
 
 ### 1. An appropriate model architecture has been employed
 
-My model consists of a convolutional neural network with two convolutional layers (`Convolution2D(6, 5, 5, activation='relu')`) having both a 5x5 filter and a depth of 6 (model.py function `create_model_LeNet()`)
+My model consists of a convolutional neural network with three convolutional layers (`Convolution2D`) of increasing depths having filter sizes between 3x3 and 5x5 (model.py function `create_model_Nvidia()`)
 
-The model includes two RELU layers each of them immediately following a convolutional layer to introduce nonlinearity (see `activation='relu'`), and the data is normalized in the model using a Keras lambda layer (`Lambda(lambda image: image / 255.0 - 0.5)`).
+The model includes RELU layers each of them immediately following a convolutional layer to introduce nonlinearity (see `activation='relu'`), and the data is normalized in the model using a Keras lambda layer (`Lambda(lambda image: image / 255.0 - 0.5)`).
 
 ### 2. Attempts to reduce overfitting in the model
-
-The model contains max pooling layers `MaxPooling2D()` after each convolutional layer in order to reduce overfitting.
 
 The model was trained and validated on different data sets to ensure that the model was not overfitting. This was accomplished through the statement `model.fit(X_train, y_train, validation_split=0.2, ...)` which sets 20% of the training data `X_train` apart for validation. The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
@@ -78,17 +76,17 @@ To combat the underfitting, I added convolutional layers among others by switchi
 
 #### Nvidia's Model
 
-I tested another model from Nvidia (see model.py, function `create_model_Nvidia()`) having more convolutional layers and more fully connected layers than LeNet. It's validation loss was 0.02452, which is a little worse than LeNet's validation loss of 0.02058:
+I tested another model from Nvidia (see model.py, function `create_model_Nvidia()`) having more convolutional layers and more fully connected layers than LeNet. It's validation loss was 0.02452, which is almost equal to LeNet's validation loss of 0.02058:
 
 ![Nvidia model](examples/loss_model_nvidia.png)
 
-At the end of this process, the vehicle is able to drive autonomously around the track without leaving the road using LeNet.
+At the end of this process, the vehicle is able to drive autonomously around the track without leaving the road using Nvidias model.
 
 ### 2. Final Model Architecture
 
-The final model architecture (model.py, function `create_model_LeNet()`) is a convolutional neural network derived from [LeNet-5](http://yann.lecun.com/exdb/lenet/). Here is a visualization of the architecture:
+The final model architecture (model.py, function `create_model_Nvidia()`) is a convolutional neural network adapted from Nvidia. Here is a visualization of the architecture:
 
-![Model Visualization (LeNet)](examples/LeNet.jpg)
+![Model Visualization (LeNet)](examples/model_nvidia.jpg)
 
 The first layer receives a RGB camera image having 40 rows and 80 columns, which has a size a quarter of the original camera image in each direction due to the preprocessing steps described in the section "Resizing Images to a Quarter in Each Dimension".
 
@@ -96,9 +94,7 @@ The next layer is a Lambda layer normalizing the image to values between -0.5 an
 
 Then a cropping layer follows. It removes the top portion of the image containing trees and hills and sky, and the bottom portion of the image containing the hood of the car as described in the section "Cropping Images".
 
-Then a convolutional layer (using 6 filters each having size 5x5) and a max pooling layer follows recognizing low level features of the camera image like edges.
-
-Another convolutional layer (using 6 filters each having size 5x5) and max pooling layer follows to recognize high level features of the camera image like lane lines and their curvatures.
+Then three convolutional layers follow having decreasing filter sizes and increasing depths. This sequence of convolutional layers recognizes low level features of the camera image like edges in it's first layer and higher level features like lane lines and their curvatures in it's higher layers.
 
 Then after flattening the image three fully connected layers follow to finally compute a suitable steering angle from the high level features of the image.
 
