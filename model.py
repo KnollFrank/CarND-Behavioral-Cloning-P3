@@ -66,4 +66,4 @@ def train(model, X, y, save_model_2_file):
 
 if __name__ == '__main__':
     X_train, y_train = get_X_train_y_train()
-    train(create_model_LeNet(), X_train, y_train, save_model_2_file='model.h5')
+    train(create_model_Nvidia(), X_train, y_train, save_model_2_file='model.h5')
