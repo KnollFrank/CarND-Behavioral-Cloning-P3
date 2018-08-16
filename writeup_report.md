@@ -96,7 +96,7 @@ Then a cropping layer follows. It removes the top portion of the image containin
 
 Then three convolutional layers follow having decreasing filter sizes and increasing depths. This sequence of convolutional layers recognizes low level features of the camera image like edges in it's first layer and higher level features like lane lines and their curvatures in it's higher layers.
 
-Then after flattening the image three fully connected layers follow to finally compute a suitable steering angle from the high level features of the image.
+Then after flattening the image four fully connected layers follow to finally compute a suitable steering angle from the high level features of the image.
 
 ### 3. Creation of the Training Set & Training Process
 
