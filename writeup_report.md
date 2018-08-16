@@ -67,30 +67,21 @@ I found that my first model had a high mean squared error on the training set an
 
 ![LeNet model](examples/loss_model_simple.png)
 
-This implied that the model was underfitting. Indeed the model drove badly around track 1:
-
-![driving badly](examples/driving_badly.jpg)
+This implied that the model was underfitting.
 
 #### LeNet
 
+To combat the underfitting, I added convolutional layers among others by switching to [LeNet-5](http://yann.lecun.com/exdb/lenet/) (see model.py, function `create_model_LeNet()`). It had a validation loss of 0.02058 after 5 epochs of training, which is much better than the simple network's validation loss:
 
 ![LeNet model](examples/loss_model_lenet.png)
 
-minimal validation loss: 0.02058
+#### Nvidia's Model
 
-Nvidia (see paper):
+I tested another model from Nvidia (see model.py, function `create_model_Nvidia()`) having more convolutional layers and more fully connected layers than LeNet. It's validation loss was 0.02452, which is a little worse than LeNet's validation loss of 0.02058:
 
 ![Nvidia model](examples/loss_model_nvidia.png)
 
-minimal validation loss: 0.02452
-
-To combat the overfitting, I modified the model so that ...
-
-Then I ...
-
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
-
-At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
+At the end of this process, the vehicle is able to drive autonomously around the track without leaving the road using LeNet.
 
 ### 2. Final Model Architecture
 

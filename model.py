@@ -25,7 +25,6 @@ def create_model_simple():
     return model
 
 
-# val_loss: 0.02173
 def create_model_LeNet():
     model = Sequential()
     model.add(Lambda(lambda image: image / 255.0 - 0.5, input_shape=get_input_shape()))
@@ -41,7 +40,6 @@ def create_model_LeNet():
     return model
 
 
-# val_loss: 0.02381
 def create_model_Nvidia():
     model = Sequential()
     model.add(Lambda(lambda image: image / 255.0 - 0.5, input_shape=get_input_shape()))
