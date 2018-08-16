@@ -85,13 +85,21 @@ At the end of this process, the vehicle is able to drive autonomously around the
 
 ### 2. Final Model Architecture
 
-TODO:
-- the type of model used, the number of layers, the size of each layer
-- layers erklären, vor allem warum 40, 80, 30? Tipp: Preprocess, resize
-
 The final model architecture (model.py, function `create_model_LeNet()`) is a convolutional neural network derived from [LeNet-5](http://yann.lecun.com/exdb/lenet/). Here is a visualization of the architecture:
 
 ![Model Visualization (LeNet)](examples/LeNet.jpg)
+
+The first layer receives a RGB camera image having 40 rows and 80 columns, which has a size a quarter of the original camera image in each direction due to the preprocessing steps described in the section "Resizing Images to a Quarter in Each Dimension".
+
+The next layer is a Lambda layer normalizing the image to values between -0.5 and +0.5.
+
+Then a cropping layer follows. It removes the top portion of the image containing trees and hills and sky, and the bottom portion of the image containing the hood of the car as described in the section "Cropping Images".
+
+Then a convolutional layer (using 6 filters each having size 5x5) and a max pooling layer follows recognizing low level features of the camera image like edges.
+
+Another convolutional layer (using 6 filters each having size 5x5) and max pooling layer follows to recognize high level features of the camera image like lane lines and their curvatures.
+
+Then after flattening the image three fully connected layers follow to finally compute a suitable steering angle from the high level features of the image.
 
 ### 3. Creation of the Training Set & Training Process
 
@@ -101,9 +109,9 @@ To capture good driving behavior, I used the [sample driving data](https://d17h2
 
 ![center lane driving](examples/center_2016_12_01_13_31_15_308.jpg)
 
-#### Resizing Images to a Quarter
+#### Resizing Images to a Quarter in Each Dimension
 
-The training process on my local computer having no GPU was quite slow. A tip from a former udacity student I have found on the net was to resize the images. So I resized the images by adding a keras `AveragePooling2D` layer, which resulted in no performance gain. But resizing the images to a quarter using `cv2.resize()` prior to feeding them to the neural network had the desired positive effect on training speed without worsening validation loss. Here is an example of a resized image:
+The training process on my local computer having no GPU was quite slow. A tip from a former udacity student I have found on the net was to resize the images. So I resized the images by adding a keras `AveragePooling2D` layer, which resulted in no performance gain. But resizing the images to a quarter in each dimension using `cv2.resize()` prior to feeding them to the neural network had the desired positive effect on training speed without worsening validation loss. Here is an example of a resized image:
 
 ![quartered image](examples/center_2016_12_01_13_31_15_308_quartered.jpg)
 
