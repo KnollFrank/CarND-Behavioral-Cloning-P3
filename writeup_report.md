@@ -17,6 +17,7 @@ My project includes the following files:
 * model.py containing the script to create and train the model
 * preprocess.py to preprocess the recorded camera images before feeding them to the neural network
 * drive.py for driving the car in autonomous mode
+* Behavioral-Cloning.ipynb, a jupyter notebook for training some model architectures
 * model.h5 containing a trained convolutional neural network
 * writeup_report.md summarizing the results
 
