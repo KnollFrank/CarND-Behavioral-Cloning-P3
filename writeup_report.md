@@ -59,7 +59,15 @@ The overall strategy for deriving a model architecture was to start with a simpl
 
 #### Simple Neural Network
 
-My first step was to use a simple neural network model (see model.py, function `create_model_simple()`) consisting of a `Flatten` layer and a `Dense` layer. It's mean squared validation loss after 5 epochs of training was about 443 and it drove badly on the test track:
+My first step was to use a simple neural network model (see model.py, function `create_model_simple()`) consisting of a `Flatten` layer and a `Dense` layer.
+
+In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set.
+
+I found that my first model had a high mean squared error on the training set and a high mean squared error on the validation set:
+
+![LeNet model](examples/loss_model_simple.png)
+
+This implied that the model was underfitting. Indeed the model drove badly around track 1:
 
 ![driving badly](examples/driving_badly.jpg)
 
@@ -75,8 +83,6 @@ Nvidia (see paper):
 ![Nvidia model](examples/loss_model_nvidia.png)
 
 minimal validation loss: 0.02452
-
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting.
 
 To combat the overfitting, I modified the model so that ...
 
